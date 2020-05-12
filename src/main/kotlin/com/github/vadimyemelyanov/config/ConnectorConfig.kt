@@ -1,30 +1,18 @@
-package com.github.vadimyemelyanov
+package com.github.vadimyemelyanov.config
 
 import org.apache.kafka.common.config.AbstractConfig
 import org.apache.kafka.common.config.ConfigDef
 import org.apache.kafka.common.config.ConfigDef.Importance
 import org.apache.kafka.common.config.ConfigDef.Width
 
-class ConnectorConfig : AbstractConfig {
-
-    constructor(
-        definition: ConfigDef,
-        originals: MutableMap<*, *>,
-        configProviderProps: MutableMap<String, *>,
-        doLog: Boolean
-    ) : super(definition, originals, configProviderProps, doLog)
+open class ConnectorConfig : AbstractConfig {
 
     constructor(properties: Map<String, String>) : super(CONFIG_DEF, properties)
-    constructor(definition: ConfigDef, originals: MutableMap<*, *>) : super(definition, originals)
-    constructor(definition: ConfigDef, originals: MutableMap<*, *>, doLog: Boolean) : super(
-        definition,
-        originals,
-        doLog
-    )
-
+    constructor(definition: ConfigDef, originals: Map<*, *>) : super(definition, originals)
 
     companion object {
-        val CONFIG_DEF: ConfigDef = baseConfigDef()
+        val CONFIG_DEF: ConfigDef =
+            baseConfigDef()
 
         fun baseConfigDef(): ConfigDef {
             val config = ConfigDef()
@@ -137,7 +125,9 @@ class ConnectorConfig : AbstractConfig {
                 MODE_GROUP,
                 ++orderInGroup,
                 Width.MEDIUM,
-                MODE_DISPLAY, listOf(INCREMENTING_FIELD_NAME_CONFIG)
+                MODE_DISPLAY, listOf(
+                    INCREMENTING_FIELD_NAME_CONFIG
+                )
             ).define(
                 INCREMENTING_FIELD_NAME_CONFIG,
                 ConfigDef.Type.STRING,
@@ -289,5 +279,7 @@ class ConnectorConfig : AbstractConfig {
         const val MODE_DISPLAY = "Index Incrementing field"
 
         const val INDICES_CONFIG = "es.indices"
+
+        const val VERSION = "0.1"
     }
 }

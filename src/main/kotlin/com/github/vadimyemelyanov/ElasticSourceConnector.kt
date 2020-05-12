@@ -1,5 +1,7 @@
 package com.github.vadimyemelyanov
 
+import com.github.vadimyemelyanov.config.ConnectorConfig
+import com.github.vadimyemelyanov.config.ConnectorConfig.Companion.VERSION
 import com.github.vadimyemelyanov.config.ElasticConfig
 import mu.KotlinLogging
 import org.apache.kafka.common.config.ConfigDef
@@ -80,13 +82,9 @@ class ElasticSourceConnector : SourceConnector() {
         elasticConnection.closeConnection()
     }
 
-    override fun version(): String {
-        TODO("Not yet implemented")
-    }
+    override fun version() = VERSION
 
-    override fun taskClass(): Class<out Task> {
-        TODO("Not yet implemented")
-    }
+    override fun taskClass(): Class<out Task> = ElasticSourceTask::class.java
 
     override fun config(): ConfigDef {
         return ConnectorConfig.CONFIG_DEF

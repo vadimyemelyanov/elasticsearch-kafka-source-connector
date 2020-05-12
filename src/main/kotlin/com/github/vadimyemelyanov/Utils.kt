@@ -1,5 +1,6 @@
 package com.github.vadimyemelyanov
 
+import com.github.vadimyemelyanov.config.ConnectorConfig
 import org.elasticsearch.client.Response
 import java.io.BufferedReader
 import java.io.InputStreamReader
