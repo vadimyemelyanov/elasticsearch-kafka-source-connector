@@ -1,6 +1,5 @@
 package com.github.vadimyemelyanov.config
 
-import mu.KotlinLogging
 import org.apache.http.HttpHost
 import org.apache.http.auth.AuthScope
 import org.apache.http.auth.UsernamePasswordCredentials
@@ -12,7 +11,7 @@ import org.elasticsearch.client.RestHighLevelClient
 import java.io.IOException
 
 class ElasticConfig {
-    private val logger = KotlinLogging.logger {}
+    private val logger = getLogger(javaClass)
 
     private var client: RestHighLevelClient
     private var connectionRetryBackoff: Long = 0

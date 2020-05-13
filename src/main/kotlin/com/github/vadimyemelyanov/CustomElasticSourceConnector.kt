@@ -3,7 +3,7 @@ package com.github.vadimyemelyanov
 import com.github.vadimyemelyanov.config.ConnectorConfig
 import com.github.vadimyemelyanov.config.ConnectorConfig.Companion.VERSION
 import com.github.vadimyemelyanov.config.ElasticConfig
-import mu.KotlinLogging
+import com.github.vadimyemelyanov.config.getLogger
 import org.apache.kafka.common.config.ConfigDef
 import org.apache.kafka.common.config.ConfigException
 import org.apache.kafka.connect.connector.Task
@@ -13,8 +13,8 @@ import org.elasticsearch.client.Request
 import kotlin.collections.set
 import kotlin.math.min
 
-class ElasticSourceConnector : SourceConnector() {
-    private val log = KotlinLogging.logger {}
+class CustomElasticSourceConnector : SourceConnector() {
+    private val logger = getLogger(javaClass)
     private lateinit var config: ConnectorConfig
     private lateinit var elasticConnection: ElasticConfig
     private lateinit var configProperties: Map<String, String>
@@ -78,7 +78,7 @@ class ElasticSourceConnector : SourceConnector() {
     }
 
     override fun stop() {
-        log.info("stopping elastic source")
+        logger.info("stopping elastic source")
         elasticConnection.closeConnection()
     }
 
